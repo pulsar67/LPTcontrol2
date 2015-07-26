@@ -17,35 +17,95 @@
 
 package com.example.android.slidingtabsbasic;
 
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ViewAnimator;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SeekBar;
 
-import com.example.android.common.activities.SampleActivityBase;
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
-/**
- * A simple launcher activity containing a summary sample description, sample log and a custom
- * {@link android.support.v4.app.Fragment} which can display a view.
- * <p>
- * For devices with displays with a width of 720dp or greater, the sample log is always visible,
- * on other devices it's visibility is controlled by an item on the Action Bar.
- */
-public class MainActivity extends SampleActivityBase {
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
+     * three primary sections of the app. We use a {@link android.support.v4.app.FragmentPagerAdapter}
+     * derivative, which will keep every loaded fragment in memory. If this becomes too memory
+     * intensive, it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 
+    /**
+     * The {@link ViewPager} that will display the three primary sections of the app, one at a
+     * time.
+     */
+    ViewPager mViewPager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            SlidingTabsBasicFragment fragment = new SlidingTabsBasicFragment();
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
+        // Create the adapter that will return a fragment for each of the three primary sections
+        // of the app.
+        mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the action bar.
+        final ActionBar actionBar = getActionBar();
+
+        // Specify that the Home/Up button should not be enabled, since there is no hierarchical
+        // parent.
+        actionBar.setHomeButtonEnabled(false);
+
+        // Specify that we will be displaying tabs in the action bar.
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        // Set up the ViewPager, attaching the adapter and setting up a listener for when the
+        // user swipes between sections.
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mAppSectionsPagerAdapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                // When swiping between different app sections, select the corresponding tab.
+                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
+                // Tab.
+                actionBar.setSelectedNavigationItem(position);
+            }
+        });
+
+        // For each of the sections in the app, add a tab to the action bar.
+        for (int i = 0; i < mAppSectionsPagerAdapter.getCount(); i++) {
+            // Create a tab with text corresponding to the page title defined by the adapter.
+            // Also specify this Activity object, which implements the TabListener interface, as the
+            // listener for when this tab is selected.
+            actionBar.addTab(
+                    actionBar.newTab()
+                            .setText(mAppSectionsPagerAdapter.getPageTitle(i))
+                            .setTabListener(this));
         }
+    }
+
+    // Lorsqu'un onglet est déselectionné => c'est là qu'on sauvegarde le contexte (? to be confirmed? sauvegardé au changement plutôt?)
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+    }
+
+    // Lorsqu'un onglet est sélectionné => on recall le contexte
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        // When the given tab is selected, switch to the corresponding page in the ViewPager.
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
     @Override
@@ -54,15 +114,89 @@ public class MainActivity extends SampleActivityBase {
         return true;
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the primary
+     * sections of the app.
+     */
+    public static class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
-        return super.onPrepareOptionsMenu(menu);
+        public AppSectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            switch (i) {
+                case 0:
+                    // The first section of the app is the most interesting -- it offers
+                    // a launchpad into the other demonstrations in this example application.
+                    return new GeneralFragment();
+                case 1:
+                    return new IntervallometerFragment();
+                default:
+                    return new LagFragment();
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch(position)
+            {
+                case 0:
+                    return "GENERAL";
+                case 1:
+                    return "INTERVALLOMETRE";
+                case 2:
+                    return "LAG";
+            }
+            return "NONE";
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    /**
+     * A fragment that launches other parts of the demo application.
+     */
+    public static class GeneralFragment extends Fragment {
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.pager_general, container, false);
+
+            return rootView;
+        }
+    }
+
+    /**
+     * A fragment that launches other parts of the demo application.
+     */
+    public static class IntervallometerFragment extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.pager_intervallometer, container, false);
+
+            return rootView;
+        }
+    }
+
+    /**
+     * A fragment that launches other parts of the demo application.
+     */
+    public static class LagFragment extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.pager_lag, container, false);
+
+            return rootView;
+        }
     }
 }

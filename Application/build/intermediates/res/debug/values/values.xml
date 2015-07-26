@@ -19,19 +19,9 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_tiny">4dp</dimen>
     <dimen name="vertical_page_margin">@dimen/margin_medium</dimen>
-    <!-- From: file:/E:/DEVELOPPEMENT/ANDROIDSTUDIO/LPTcontrol2/Application/src/main/res/values/base-strings.xml -->
+    <!-- From: file:/E:/DEVELOPPEMENT/ANDROIDSTUDIO/LPTcontrol2/Application/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_name">LPTcontrol2</string>
-    <string name="intro_message">
-        <![CDATA[
-        
-            
-            A basic sample which shows how to use SlidingTabLayout to display a custom
-            ViewPager title strip which gives continuous feedback to the user when scrolling.
-            
-        
-        ]]>
-    </string>
+    <string name="app_name">SlidingTabsBasic</string>
     <!-- From: file:/E:/DEVELOPPEMENT/ANDROIDSTUDIO/LPTcontrol2/Application/src/main/res/values/fragmentview_strings.xml -->
     <eat-comment/>
     <string name="sample_hide_log">Hide Log</string>

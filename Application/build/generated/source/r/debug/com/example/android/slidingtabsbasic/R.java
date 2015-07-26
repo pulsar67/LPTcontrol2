@@ -139,30 +139,26 @@ containing a value of this type.
         public static final int tile=0x7f020002;
     }
     public static final class id {
-        public static final int connectBtn=0x7f090006;
-        public static final int log_fragment=0x7f090003;
-        public static final int sample_content_fragment=0x7f090001;
-        public static final int sample_main_layout=0x7f090000;
+        public static final int connectBtn=0x7f090004;
+        public static final int pager=0x7f090000;
+        public static final int sample_content_fragment=0x7f090003;
+        public static final int sample_main_layout=0x7f090001;
         public static final int sample_output=0x7f090002;
-        public static final int sliding_tabs=0x7f090004;
-        public static final int viewpager=0x7f090005;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int fragment_sample=0x7f030001;
-        public static final int pager_general=0x7f030002;
-        public static final int pager_intervallometer=0x7f030003;
-        public static final int pager_lag=0x7f030004;
+        public static final int pager_general=0x7f030001;
+        public static final int pager_intervallometer=0x7f030002;
+        public static final int pager_lag=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f080000;
     }
     public static final class string {
         public static final int app_name=0x7f070000;
-        public static final int intro_message=0x7f070001;
-        public static final int sample_hide_log=0x7f070002;
-        public static final int sample_show_log=0x7f070003;
-        public static final int str_connect=0x7f070004;
+        public static final int sample_hide_log=0x7f070001;
+        public static final int sample_show_log=0x7f070002;
+        public static final int str_connect=0x7f070003;
     }
     public static final class style {
         public static final int AppTheme=0x7f050002;
