@@ -26,12 +26,11 @@ int dimen vertical_page_margin 0x7f040001
 int drawable ic_action_device_access_bluetooth_searching 0x7f020000
 int drawable ic_launcher 0x7f020001
 int drawable tile 0x7f020002
-int id connectBtn 0x7f090007
-int id log_fragment 0x7f090002
-int id menu_toggle_log 0x7f090006
-int id sample_content_fragment 0x7f090003
+int id connectBtn 0x7f090006
+int id log_fragment 0x7f090003
+int id sample_content_fragment 0x7f090001
 int id sample_main_layout 0x7f090000
-int id sample_output 0x7f090001
+int id sample_output 0x7f090002
 int id sliding_tabs 0x7f090004
 int id viewpager 0x7f090005
 int layout activity_main 0x7f030000

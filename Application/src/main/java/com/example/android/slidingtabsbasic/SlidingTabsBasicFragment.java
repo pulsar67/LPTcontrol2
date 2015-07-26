@@ -16,7 +16,6 @@
 
 package com.example.android.slidingtabsbasic;
 
-import com.example.android.common.logger.Log;
 import com.example.android.common.view.SlidingTabLayout;
 
 import android.os.Bundle;
@@ -159,8 +158,6 @@ public class SlidingTabsBasicFragment extends Fragment {
             // Add the newly created View to the ViewPager
             container.addView(view);
 
-            Log.i(LOG_TAG, "instantiateItem() [position: " + position + "]");
-
             // Return the View
             return view;
         }
@@ -172,7 +169,6 @@ public class SlidingTabsBasicFragment extends Fragment {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             //container.removeView((View) object);
-            Log.i(LOG_TAG, "destroyItem() [position: " + position + "]");
         }
 
     }
